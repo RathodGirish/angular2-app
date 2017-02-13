@@ -1,0 +1,94 @@
+<nav class="navbar navbar-default navbar-dark bg-inverse">
+  <div class="container-fluid">
+    <div class="clearfix navbar-header">
+      <button (click)="isCollapsed = !isCollapsed"
+        class="navbar-toggler pull-xs-right hidden-sm-up mobile-show" type="button"
+        aria-controls="maprentalsNavbar"
+        aria-label="Toggle navigation">
+          {{menuIcon}}
+      </button>
+      <a #navbarbrand class="navbar-brand jura-font" href="/">
+          <img src="assets/public/img/logo.png" class='hidden-xs' />
+          <img src="assets/public/img/logo-small.png" class='hidden-sm hidden-md hidden-lg' />
+      </a>
+    </div>
+   
+    <div class="navbar-toggleable-xs navbar-collapse" id="#maprentalsNavbar"
+    [attr.aria-expanded]="!isCollapsed" [ngClass]="{collapse: isCollapsed}">
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id=""><div>Menu <div class="caret"></div></div></a>
+            <ul class="dropdown-menu">
+              <li (click)="isCollapsed = true" *ngFor="let menuItem of menuItems"
+                class="nav-item" routerLinkActive="active"
+                [ngClass]="getMenuItemClasses(menuItem)">
+                <a class="nav-item nav-link" [routerLink]="[menuItem.path]" routerLinkActive="active">{{menuItem.title}}</a>
+              </li>
+            </ul>
+        </li>
+        <li class="dropdown" *ngIf="currentUser != null">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id=""><div>User <div class="caret"></div></div></a>
+            <ul class="dropdown-menu">
+              <li (click)="isCollapsed = true" *ngFor="let userMenu of userMenus"
+                class="nav-item" routerLinkActive="active"
+                [ngClass]="getUserMenuClasses(userMenu)">
+                <a class="nav-item nav-link" [routerLink]="[userMenu.path]" routerLinkActive="active">{{userMenu.title}}</a>
+              </li>
+              <li role="separator" class="divider"></li>
+              <li><a (click)="logout($event)" class="btnlogout">Log out</a> </li>
+            </ul>
+        </li>
+        <li class='hidden-xs listRentalFreeLi pad0' >
+          <span class="btnlstrental cursor-pointer" id="btnlstrental" (click)="checkAuth($event)"><img src="assets/public/img/free-ribbon.png" class='free-img' /><b class="padR15">List a Rental</b></span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<button type="button" id="loginModalBtn" class="btn btn-default hidden" (click)="loginModal.show()"></button>
+<lmodal #loginModal></lmodal>
+
+<button type="button" id="registrationModalBtn" class="btn btn-default hidden" (click)="registrationModal.show()"></button>
+<rmodal #registrationModal></rmodal>
+
+<!-- <button type="button" id="registrationModalBtn" class="btn btn-default hidden" (click)="registrationModal.show()">test</button>
+
+<modal id="registrationModal">
+  <div class="app-modal-body">
+    <div class="col-sm-12">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <img src="assets/public/img/logo-small.png" class='img-responsive logo-small' />
+    </div>
+    <form method="post" id="registrationFrm">
+        <table cellpadding="0" cellspacing="0" class="table borderless" border="0">
+            <tr>
+                <td>
+                    <input type="email" required="true" name="email" placeholder="Email">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="password" required="true" name="password" id="password" placeholder="Password" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="password" required="true" name="confirmpassword" placeholder="Confirm Password" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                    <button type="submit" name="btnregister" class="btn btn-green btn-default">Sign Up</button>
+                </td>
+            </tr>
+            <tr>
+                <td class="text-center"><p>Already have an account?</p></td>
+            </tr>
+            <tr>
+                <td class="text-center"><button type="button" name="btnregister" class="btn btn-default" id="btnlogin1">Log in</button></td>
+            </tr>
+        </table>
+    </form>
+  </div>
+</modal> -->

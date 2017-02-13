@@ -1,0 +1,83 @@
+<div id="cover" *ngIf="loading==true"></div>
+<section class="container mrgT15" id="profileSection">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 pad0">
+            <p ng-bind="_success_msg" class="{{_success_msg != '' ? 'mrgT10': ''}} text-success clearfix col-sm-12">{{_success_msg}}</p>
+            <p ng-bind="_fail_msg" class="{{_fail_msg != '' ? 'mrgT10': ''}} text-danger clearfix">{{_fail_msg}}</p>
+        </div>
+        <div class="col-md-12">
+            <!-- Div Panel -->
+            <div class="panel panel-default">
+                <!-- Panel Heading -->
+                <div class="panel-heading col-sm-12 col-xs-12">
+                    <div class="panel-title">My Profile</div>
+                </div><!-- End panel heading -->
+                <!-- Panel body -->
+                <div class="panel-body">
+                    <form class="form-horizontal" id="updateProfileForm" #updateProfileForm="ngForm" novalidate (ngSubmit)="updateProfile($event, updateProfileForm.value, updateProfileForm.valid)">
+                        <div class="container-fluid">
+                            <hr>
+                            <p id="update_profile_success_result" class="text-success text-center"></p>
+                            <p id="update_profile_fail_result" class="text-danger text-center"></p>
+                            <div class="row">
+                                <div class="col-md-12 personal-info col-sm-12">
+                                    <div class="form-group">
+                                        <label for="FirstName" class="col-md-3 control-label">First Name:</label>
+                                        <div class="col-md-8">
+                                            <input type="text" class="form-control" id="FirstName" name="FirstName" placeholder="FirstName"  [ngModel]="profile.FirstName" #FirstName="ngModel" required/>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="LastName" class="col-md-3 control-label">Last Name:</label>
+                                        <div class="col-md-8">
+                                            <input type="text" class="form-control" id="LastName" name="LastName" placeholder="LastName"  [ngModel]="profile.LastName" #LastName="ngModel" required/>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="Contact" class="col-md-3 control-label">Contact:</label>
+                                        <div class="col-md-8">
+                                            <input type="text" class="form-control" id="Contact" name="Contact" placeholder="Contact"  [ngModel]="profile.Contact" #Contact="ngModel" required/>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="Email" class="col-md-3 control-label">Email:</label>
+                                        <div class="col-md-8">
+                                            <input type="email" class="form-control" id="Email" name="Email" placeholder="Email"  [ngModel]="profile.Email" #Email="ngModel" readonly="" />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="Company" class="col-md-3 control-label">Company:</label>
+                                        <div class="col-md-8">
+                                            <input type="text" class="form-control" id="Company" name="Company" placeholder="Company"  [ngModel]="profile.Company" #Company="ngModel" required/>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="Gender" class="col-md-3 control-label">Gender:</label>
+                                        <div class="col-md-8">
+		                            		<input type="radio" id="Male" class="Gender" name="Gender" value="Male" [ngModel]="profile.Gender" #Gender="ngModel">
+				                            <label for="Male">Male</label>
+
+				                            <input type="radio" id="Female" class="Gender" name="Gender" value="Female" [ngModel]="profile.Gender" #Gender="ngModel">
+				                            <label for="Female">Female</label>
+		                            	</div>
+		                            </div> 
+		                            <div class="col-xs-offset-6 col-xs-6">
+			                            <div class="form-group">
+						                    <button type="submit" name="btnregister" id="btnUpdateProfile" class="btn btn-green btn-default" >Save</button> 
+						                </div>
+					                </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                    </form><!-- End form -->
+                </div><!-- ENd panel body -->
+            </div><!-- End panel group -->
+        </div><!-- End col div -->
+    </div>
+</section><!-- End container -->

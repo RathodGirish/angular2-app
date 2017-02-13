@@ -1,0 +1,85 @@
+<div id="cover" *ngIf="loading==true"></div>
+
+<section class="container mrgT15" id="myRentalsSection">
+    <div id="myRentalList" class="col-sm-12 col-md-12">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <p ng-bind="_success_msg" class="{{_success_msg != '' ? 'mrgT10': ''}} text-success clearfix col-sm-12">{{_success_msg}}</p>
+            <p ng-bind="_fail_msg" class="{{_fail_msg != '' ? 'mrgT10': ''}} text-danger clearfix">{{_fail_msg}}</p>
+        </div>
+        <div class="wrapper table-responsive">
+            <table class="table table-bordered table-striped">
+                <thead class="header">
+                    <tr>
+                        <th>Status</th>
+                        <th>Address</th>
+                        <th>Title</th>
+                        <th>Price</th>
+                        <th>Bed</th>
+                        <th>Listed on</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                	<tr *ngFor="let prop of myrentals">
+                		<td>
+                            <div class='col-xs-12 col-sm-12col-md-12 mrgT5' >
+                                <label class="toggle col-sm-12">
+                                    <input *ngIf="prop.IsActive == true" #isActiveToggle type="checkbox" (click)="activeDeactiveProperty(prop)" checked="">
+                                    <input *ngIf="prop.IsActive == false" #isActiveToggle type="checkbox" (click)="activeDeactiveProperty(prop)">
+                                    <span class="handle">
+                                        <span *ngIf="prop.IsActive == false" class="toggleValue">Deactive</span>
+                                        <span *ngIf="prop.IsActive == true" class="toggleValue Active">Active</span>
+                                    </span>
+                                </label>
+                            </div>
+                        </td>
+                		<td>{{prop.Address}}</td>
+                		<td>{{prop.Title}}</td>
+                		<td>${{prop.MonthlyRent}}</td>
+                		<td>{{prop.Bed}}</td>
+                		<td>{{prop.DateCreated}}</td>
+                		<td class="col-sm-2">
+                            <a class='btn btn-success' (click)="editProperty($event, prop)" href='javascript:void(0)' target='_self'><i class='glyphicon glyphicon-pencil'></i></a>
+
+                            <a class='btn btn-danger' (click)="deleteProperty($event, prop)" href='javascript:void(0)'><i class='glyphicon glyphicon-trash'></i></a>
+                        </td>
+                	</tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+<button type="button" id="deleteAlertModalBtn" class="btn btn-default hide" (click)="deleteAlertModal.show()"></button>
+
+<div class="modal fade" tabindex="-1" [ngClass]="{'in': visibleAnimate}"
+       [ngStyle]="{'display': visible ? 'block' : 'none', 'opacity': visibleAnimate ? 1 : 0}">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header clearfix">
+                <div class="col-sm-12 pad0">
+                    <button type="button" (click)="hideModal()" class="close"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="">Delete Property</h4>
+                </div>
+            </div>
+            <div class="modal-body clearfix">
+                <div class="app-modal-body">
+                    <div>
+                        <p> 
+                            DON'T DELETE! <br><br>
+                            {{activeDeactiveMsg}}
+                        </p>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <p ng-bind="login_success_msg" class="{{login_success_msg != '' ? 'mrgT10': ''}} text-success clearfix col-sm-12">{{login_success_msg}}</p>
+                        <p ng-bind="login_fail_msg" class="{{login_fail_msg != '' ? 'mrgT10': ''}} text-danger clearfix">{{login_fail_msg}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" (click)="hideModal()">Keep saved</button>
+                <button *ngIf="isDeactiveBtn == true" type="button" class="btn btn-default" (click)="deActivateProperty()">De-activate</button>
+                <a href="javascript:void()" id="removeProperty" class="text-danger" (click)="setDeleteTrueProperty()">I no longer manage this property, delete please.</a>
+            </div>
+        </div>
+    </div>
+</div>

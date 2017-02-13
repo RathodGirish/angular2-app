@@ -1,0 +1,69 @@
+<div class="modal fade" tabindex="-1" [ngClass]="{'in': visibleAnimate}"
+       [ngStyle]="{'display': visible ? 'block' : 'none', 'opacity': visibleAnimate ? 1 : 0}">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="app-modal-body">
+          <div class="col-sm-12">
+              <button type="button" (click)="hide()" class="close"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+              <img src="assets/public/img/logo-small.png" class='img-responsive logo-small' />
+          </div>
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <p ng-bind="registration_success_msg" class="{{registration_success_msg != '' ? 'mrgT10': ''}} text-success clearfix">{{registration_success_msg}}</p>
+            <p ng-bind="registration_fail_msg" class="{{registration_fail_msg != '' ? 'mrgT10': ''}} text-danger clearfix">{{registration_fail_msg}}</p>
+          </div>
+          <form id="regitrationForm" #regitrationForm="ngForm" novalidate (ngSubmit)="registration($event, regitrationForm.value, regitrationForm.valid)">
+            <table cellpadding="0" cellspacing="0" class="table borderless" border="0">
+              <tr>
+                <td>
+                  <div class="form-group">
+                    <input type="email" class="form-control" name="email" [ngModel]="user.email" 
+                      required  #email="ngModel" pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$" placeholder="Email">
+                    <small [hidden]="email.valid || (email.pristine && !regitrationForm.submitted)" class="text-danger">
+                      Email is required and format should be <i>john@doe.com</i>.
+                    </small>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="form-group">
+                    <input type="password" class="form-control" name="password" [ngModel]="user.password" 
+                      required validateEqual="confirmPassword" reverse="true" #password="ngModel" minlength="6" placeholder="Password">
+                    <small [hidden]="password.valid || (password.pristine && !regitrationForm.submitted)" class="text-danger">
+                      Password is required
+                    </small>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="form-group">
+                    <input type="password" class="form-control" name="confirmPassword" [ngModel]="user.confirmPassword" 
+                      required validateEqual="password" reverse="false" #confirmPassword="ngModel"  placeholder="Confirm Password">
+                    <small [hidden]="confirmPassword.valid || (confirmPassword.pristine && !regitrationForm.submitted)" class="text-danger">
+                      Password mismatch
+                    </small>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2" align="center">
+                    <button type="submit" name="btnregister" class="btn btn-green btn-default">Sign Up</button>
+                </td>
+              </tr>
+              <tr>
+                <td class="text-center"><p>Already have an account?</p></td>
+              </tr>
+              <tr>
+                <td class="text-center">
+                  <button type="button" name="btnregister" class="btn btn-default" (click)="openModal('loginModalBtn')" id="btnlogin1">Log in</button>
+                </td>
+              </tr>
+            </table>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

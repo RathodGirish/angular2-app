@@ -1,0 +1,62 @@
+<a #navbarbrand class="hide navbar-brand jura-font" href="/">
+</a>
+<div class="modal fade" tabindex="-1" [ngClass]="{'in': visibleAnimate}"
+       [ngStyle]="{'display': visible ? 'block' : 'none', 'opacity': visibleAnimate ? 1 : 0}">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="app-modal-body">
+          <div class="col-sm-12">
+            <button type="button" (click)="hide()" class="close"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <img src="assets/public/img/logo-small.png" class='img-responsive logo-small' />
+          </div>
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <p ng-bind="login_success_msg" class="{{login_success_msg != '' ? 'mrgT10': ''}} text-success clearfix col-sm-12">{{login_success_msg}}</p>
+            <p ng-bind="login_fail_msg" class="{{login_fail_msg != '' ? 'mrgT10': ''}} text-danger clearfix">{{login_fail_msg}}</p>
+          </div>
+          <form id="loginForm" #loginForm="ngForm" novalidate (ngSubmit)="login($event, loginForm.value, loginForm.valid)">
+            <table cellpadding="0" cellspacing="0" class="table borderless" border="0">
+              <tr>
+                <td>
+                  <div class="form-group">
+                    <input type="email" class="form-control" name="email" [ngModel]="user.email" required #email="ngModel" pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$"  placeholder="Email">
+                    <small [hidden]="email.valid || (email.pristine && !loginForm.submitted)" class="text-danger">
+                      Email is required and format should be john@doe.com.
+                    </small>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="form-group">
+                    <input type="password" class="form-control" name="password" [ngModel]="user.password" required #password="ngModel"  placeholder="Password">
+                    <small [hidden]="password.valid || (password.pristine && !loginForm.submitted)" class="text-danger">
+                      Password is required
+                    </small>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2" align="center">
+                  <div class="form-group">
+                    <button type="submit" name="btnlogin" id="" class="btn btn-default" id="btnlogin1">Sign in</button>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td class="text-center"><p>New to MapRentals?</p></td>
+              </tr>
+              <tr>
+                <td class="text-center">
+                  <div class="form-group">
+                    <button type="button" name="btnregister" id="btnregister" class="btn btn-green btn-default" (click)="openModal('registrationModalBtn')" >Create an Account</button> 
+                  </div>
+                </td>
+              </tr>
+            </table>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

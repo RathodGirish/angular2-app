@@ -1,0 +1,405 @@
+<div id="cover" *ngIf="loading==true"></div>
+
+<!-- <section class="container">
+    <h3>Property Not found</h3>
+</section>  -->   
+
+<section class="container">
+    <h2 class="col-lg-12 col-md-12 col-sm-12 col-xs-12 col-md-12 text-center">List your rental for FREE!</h2>
+
+    <form id="propertyForm" #propertyForm="ngForm" novalidate (ngSubmit)="manageProperty($event, propertyForm.value, propertyForm.valid)" class="form-horizontal">
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-lg-7 col-md-7 col-sm-12">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label required" for="">Property : </label>
+                        <div class="col-sm-8">
+                            <input type="radio" id="Apartment" #Apartment class="PropertyType" value='Apartment' name="PropertyType" [ngModel]="property.PropertyType" #PropertyType="ngModel" (change)="selectedPropertyType=$event.target.value">
+                            <label for="Apartment">Apartment</label>
+
+                            <input type="radio" id="House" #House class="PropertyType" name="PropertyType" value='House' [ngModel]="property.PropertyType" #PropertyType="ngModel" (change)="selectedPropertyType=$event.target.value">
+                            <label for="House">House</label>
+
+                            <input type="radio" id="Room" #Room class="PropertyType" value='Room' name="PropertyType" [ngModel]="property.PropertyType" #PropertyType="ngModel" (change)="selectedPropertyType=$event.target.value">
+                            <label for="Room">Room</label>
+
+                            <div class="customeText">
+                                <input type="text" class="wd100 form-control" id="PropertyTypeOther" name="PropertyType" placeholder="Other" [ngModel]="property.PropertyType" required #PropertyType="ngModel" />
+                            </div>
+
+                            <small [hidden]="PropertyType.valid || (PropertyType.pristine && !propertyForm.submitted)" class="text-danger">
+                                Please select property type.
+                            </small>
+                        </div>
+                    </div>
+
+                    <div class="form-group" *ngIf="selectedPropertyType == 'Room'">
+                        <label class="col-sm-3 control-label required" for="">Beds : </label>
+                        <div class="col-sm-8" id="bedsValidateDiv">
+                            <input type="radio" id="Studio" class="beds" name="Bed" value="Studio" [ngModel]="property.Bed" #Bed="ngModel">
+                            <label for="Studio">Studio</label>
+
+                            <input type="radio" id="beds1" class="beds" name="Bed" value="1" [ngModel]="property.Bed" #Bed="ngModel">
+                            <label for="beds1">1</label>
+
+                            <input type="radio" id="beds2" class="beds" name="Bed" value="2" [ngModel]="property.Bed" #Bed="ngModel">
+                            <label for="beds2">2</label>
+
+                            <input type="radio" id="beds3" class="beds" name="Bed" value="3" [ngModel]="property.Bed" #Bed="ngModel">
+                            <label for="beds3">3</label>
+
+                            <input type="radio" id="beds4" class="beds" name="Bed" value="4" [ngModel]="property.Bed" #Bed="ngModel">
+                            <label for="beds4">4</label>
+
+                            <div class="customeNumber">
+                                <input type="number" class="wd50 form-control" id="bedsCustom" name="Bed" placeholder="" [ngModel]="property.Bed" #Bed="ngModel" required/>
+                            </div>
+
+                            <small [hidden]="Bed.valid || (Bed.pristine && !propertyForm.submitted)" class="text-danger">
+                                Please select beds.
+                            </small>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" for="">Baths : </label>
+                        <div class="col-sm-8">
+                            <input type="radio" id="baths1" class="baths" name="Bath" value="1" [ngModel]="property.Bath" #Bath="ngModel">
+                            <label for="baths1">1</label>
+
+                            <input type="radio" id="baths2" class="baths" name="Bath" value="2" [ngModel]="property.Bath" #Bath="ngModel">
+                            <label for="baths2">2</label>
+
+                            <input type="radio" id="baths3" class="baths" name="Bath" value="3" [ngModel]="property.Bath" #Bath="ngModel">
+                            <label for="baths3">3</label>
+
+                            <div class="customeNumber">
+                                <input type="number" class="wd50 form-control" id="bathsCustom" name="Bath" placeholder="" [ngModel]="property.Bath" #Bath="ngModel" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" for="">Pets : </label>
+                        <div class="col-sm-8">
+                            <input type="radio" id="petsNo" class="pets" name="Pet" value="No" [ngModel]="property.Pet" #Pet="ngModel">
+                            <label for="petsNo">No</label>
+
+                            <input type="radio" id="petsCats" class="pets" name="Pet" value="Cats" [ngModel]="property.Pet" #Pet="ngModel">
+                            <label for="petsCats">Cats</label>
+
+                            <input type="radio" id="petsDogs" class="pets" name="Pet" value="Dogs" [ngModel]="property.Pet" #Pet="ngModel">
+                            <label for="petsDogs">Dogs</label>
+
+                            <input type="radio" id="petsAny" class="pets" name="Pet" value="Any" [ngModel]="property.Pet" #Pet="ngModel">
+                            <label for="petsAny" data-toggle="tooltip" data-placement="top" title="IE. Birds, Fish, Lizards, etc">Any</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" for="">Smoking : </label>
+                        <div class="col-sm-8">
+                            <input type="radio" id="smokingNo" #Smoking class="Smoking" name="Smoking" value="false" [ngModel]="property.Smoking" #Smoking="ngModel">
+                            <label for="smokingNo">No</label>
+
+                            <!-- <input type="radio" id="Room" #Room class="PropertyType" value='Room' name="PropertyType" [ngModel]="property.PropertyType" #PropertyType="ngModel" (change)="selectedPropertyType=$event.target.value">
+                            <label for="Room">Room</label> -->
+
+                            <input type="radio" id="smokingYes" #Smoking class="Smoking" name="Smoking" value="true" [ngModel]="property.Smoking" #Smoking="ngModel">
+                            <label for="smokingYes">Yes</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" for="">Rent Includes : </label>
+                        <div class="col-sm-8">
+                            
+                            <input type="checkbox" id="Heat" class="rentIncludes" name="RentInclude" value="Heat" #Heat  (change)="changeCheckbox(Heat, Heat.checked, 'RentInclude')" [checked]="property.RentInclude.indexOf('Heat') >= 0? true: false">
+                            <label for="Heat">Heat</label>
+
+                            <input type="checkbox" id="Electricity" class="rentIncludes" name="RentInclude" value="Electricity" #Electricity  (change)="changeCheckbox(Electricity, Electricity.checked, 'RentInclude')" [checked]="property.RentInclude.indexOf('Electricity') >= 0? true: false">
+                            <label for="Electricity">Electricity</label>
+
+                            <input type="checkbox" id="Water" class="rentIncludes" name="RentInclude" value="Water" #Water (change)="changeCheckbox(Water, Water.checked, 'RentInclude')" [checked]="property.RentInclude.indexOf('Water') >= 0? true: false">
+                            <label for="Water">Water</label>
+
+                            <input type="checkbox" id="Cable" class="rentIncludes" name="RentInclude" value="Cable" #Cable (change)="changeCheckbox(Cable, Cable.checked, 'RentInclude')" [checked]="property.RentInclude.indexOf('Cable') >= 0? true: false">
+                            <label for="Cable" >Cable</label>
+
+                            <input type="checkbox" id="Internet" class="rentIncludes" name="RentInclude" value="Internet" #Internet (change)="changeCheckbox(Internet, Internet.checked, 'RentInclude')" [checked]="property.RentInclude.indexOf('Internet') >= 0? true: false">
+                            <label for="Internet">Internet</label>
+
+                            <input type="checkbox" id="RentParking" class="rentIncludes" name="RentInclude" value="Parking" #RentParking  (change)="changeCheckbox(RentParking, RentParking.checked, 'RentInclude')" [checked]="property.RentInclude.indexOf('Parking') >= 0? true: false">
+                            <label for="RentParking">Parking</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" for="">Parking : </label>
+                        <div class="col-sm-8">
+                            <input type="radio" id="None" class="parking" name="Parking" value="None" [ngModel]="property.Parking" #Parking="ngModel">
+                            <label for="None">None</label>
+
+                            <input type="radio" id="Outdoor" class="parking" name="Parking" value="Outdoor" [ngModel]="property.Parking" #Parking="ngModel">
+                            <label for="Outdoor">Outdoor</label>
+
+                            <input type="radio" id="Indoor" class="parking" name="Parking" value="Indoor" [ngModel]="property.Parking" #Parking="ngModel">
+                            <label for="Indoor">Indoor</label>
+
+                            <input type="radio" id="Heated" class="parking" name="Parking" value="Heated" [ngModel]="property.Parking" #Parking="ngModel">
+                            <label for="Heated">Heated</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group" style="margin-bottom: 0 !important">
+                        <label class="col-sm-3 control-label" for="">Amenities : </label>
+                        <div class="col-sm-8">
+                            <input type="checkbox" id="Laundry" class="Amenities" name="Amenities" value="Laundry" #Laundry (change)="changeCheckbox(Laundry, Laundry.checked, 'Amenities')" [checked]="property.Amenities.indexOf('Laundry') >= 0? true: false">
+                            <label for="Laundry">Laundry</label>
+
+                            <input type="checkbox" id="AC" class="Amenities" name="Amenities" value="AC" #AC (change)="changeCheckbox(AC, AC.checked, 'Amenities')" [checked]="property.Amenities.indexOf('AC') >= 0? true: false">
+                            <label for="AC">AC</label>
+
+                            <input type="checkbox" id="busStop" class="Amenities" name="Amenities" value="Bus Stop" #busStop (change)="changeCheckbox(busStop, busStop.checked, 'Amenities')" [checked]="property.Amenities.indexOf('Bus Stop') >= 0? true: false">
+                            <label for="busStop">Bus Stop</label>
+
+                            <input type="checkbox" id="Pool" class="Amenities" name="Amenities" value="Pool" #Pool (change)="changeCheckbox(Pool, Pool.checked, 'Amenities')" [checked]="property.Amenities.indexOf('Pool') >= 0? true: false">
+                            <label for="Pool">Pool</label>
+
+                            <input type="checkbox" id="WheelChair" class="Amenities" name="Amenities" value="WheelChair" #WheelChair (change)="changeCheckbox(WheelChair, WheelChair.checked, 'Amenities')" [checked]="property.Amenities.indexOf('WheelChair') >= 0? true: false">
+                            <label for="WheelChair">WheelChair</label>
+
+                            <input type="checkbox" id="EIA_Friendly" class="Amenities" name="Amenities" value="EIA Friendly" #EIA_Friendly (change)="changeCheckbox(EIA_Friendly, EIA_Friendly.checked, 'Amenities')" [checked]="property.Amenities.indexOf('EIA Friendly') >= 0? true: false">
+                            <label for="EIA_Friendly">EIA Friendly</label>
+
+                            <input type="checkbox" id="a55" class="Amenities" name="Amenities" value="55+" #a55 (change)="changeCheckbox(a55, a55.checked, 'Amenities')" [checked]="property.Amenities.indexOf('55+') >= 0? true: false">
+                            <label for="a55">55+</label>
+
+                            <input type="checkbox" id="Main_Floor" class="Amenities" name="Amenities" value="Main Floor" #Main_Floor (change)="changeCheckbox(Main_Floor, Main_Floor.checked, 'Amenities')" [checked]="property.Amenities.indexOf('Main Floor') >= 0? true: false">
+                            <label for="Main_Floor">Main Floor</label>
+
+                            <input type="checkbox" id="Dishwasher" class="Amenities" name="Amenities" value="Dishwasher" #Dishwasher (change)="changeCheckbox(Dishwasher, Dishwasher.checked, 'Amenities')" [checked]="property.Amenities.indexOf('Dishwasher') >= 0? true: false">
+                            <label for="Dishwasher">Dishwasher</label>
+
+                            <input type="checkbox" id="BBQ" class="Amenities" name="Amenities" value="BBQ" #BBQ (change)="changeCheckbox(BBQ, BBQ.checked, 'Amenities')" [checked]="property.Amenities.indexOf('BBQ') >= 0? true: false">
+                            <label for="BBQ">BBQ</label>
+
+                            <input type="checkbox" id="OnsiteCaretaker" class="Amenities" name="Amenities" value="Onsite Caretaker" #OnsiteCaretaker (change)="changeCheckbox(OnsiteCaretaker, OnsiteCaretaker.checked, 'Amenities')" [checked]="property.Amenities.indexOf('Onsite Caretaker') >= 0? true: false">
+                            <label for="OnsiteCaretaker">Onsite Caretaker</label>
+
+                            <input type="checkbox" id="Balcony" class="Amenities" name="Amenities" value="Balcony" #Balcony (change)="changeCheckbox(Balcony, Balcony.checked, 'Amenities')" [checked]="property.Amenities.indexOf('Balcony') >= 0? true: false">
+                            <label for="Balcony">Balcony</label>
+
+                            <input type="checkbox" id="Yard" class="Amenities" name="Amenities" value="Yard" #Yard (change)="changeCheckbox(Yard, Yard.checked, 'Amenities')" [checked]="property.Amenities.indexOf('Yard') >= 0? true: false">
+                            <label for="Yard">Yard</label>
+
+                            <input type="checkbox" id="Storage" class="Amenities" name="Amenities" value="Storage" #Storage (change)="changeCheckbox(Storage, Storage.checked, 'Amenities')" [checked]="property.Amenities.indexOf('Storage') >= 0? true: false">
+                            <label for="Storage">Storage</label>
+
+                            <input type="checkbox" id="Garage" class="Amenities" name="Amenities" value="Garage" #Garage (change)="changeCheckbox(Garage, Garage.checked, 'Amenities')" [checked]="property.Amenities.indexOf('Garage') >= 0? true: false">
+                            <label for="Garage">Garage</label>
+
+                            <input type="checkbox" id="Elevator" class="Amenities" name="Amenities" value="Elevator" #Elevator (change)="changeCheckbox(Elevator, Elevator.checked, 'Amenities')" [checked]="property.Amenities.indexOf('Elevator') >= 0? true: false">
+                            <label for="Elevator">Elevator</label>
+
+                            <input type="checkbox" id="Rec_Room" class="Amenities" name="Amenities" value="Rec Room" #Rec_Room (change)="changeCheckbox(Rec_Room, Rec_Room.checked, 'Amenities')" [checked]="property.Amenities.indexOf('Rec Room') >= 0? true: false">
+                            <label for="Rec_Room">Rec Room</label>
+
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12"><hr></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" for="">Landlord Type : </label>
+                        <div class="col-sm-8">
+                            <input type="radio" id="privateOwner" class="landlordType" name="LandlordType" value="Private Owner" [ngModel]="property.LandlordType" #LandlordType="ngModel">
+                            <label for="privateOwner">Private Owner</label>
+
+                            <input type="radio" id="professionalManager" class="landlordType" name="LandlordType" value="Professional Manager" [ngModel]="property.LandlordType" #LandlordType="ngModel">
+                            <label for="professionalManager">Professional Manager</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" for="">Available Date : </label>
+                        <div class="col-sm-8">
+                            <input type="checkbox" id="Immediately" class="propAvailableDate" value='Immediately' name="IsImmediateAvailable" [ngModel]="property.IsImmediateAvailable" #IsImmediateAvailable="ngModel" [checked]="property.DateAvailable != ''? false: true" (click)="changeIsImmediateAvailable()">
+                            <label for="Immediately">Immediately</label>
+
+                            <div class="form-group customFormControl has-feedback">
+
+                                <input class="form-control"
+                                    id="DateAvailable" name="DateAvailable" placeholder="Date" type="date" #DateAvailable="ngModel" 
+                                    [ngModel]="property.DateAvailable"  ng2-datetime-picker
+                                    (change)="propAvailableDateChange()"
+                                    date-format="MM-DD" 
+                                    date-only="false" />
+                                    <i class="glyphicon glyphicon-calendar form-control-feedback"  ></i>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" for="">Agreement : </label>
+                        <div class="col-sm-8">
+                            <input type="radio" id="Lease" class="agreement" name="AgreementType" value="Lease" [ngModel]="property.AgreementType" #AgreementType="ngModel" (change)="selectedAgreement=$event.target.value">
+                            <label for="Lease">Lease</label>
+
+                            <input type="radio" id="Sublet" class="agreement" name="AgreementType" value="Sublet" [ngModel]="property.AgreementType" #AgreementType="ngModel" (change)="selectedAgreement=$event.target.value">
+                            <label for="Sublet">Sublet</label>
+
+                            <input type="radio" id="Month-to-Month" class="agreement" name="AgreementType" value="Month-to-Month" [ngModel]="property.AgreementType" #AgreementType="ngModel" (change)="selectedAgreement=$event.target.value">
+                            <label for="Month-to-Month">Month-to-Month</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group" *ngIf="selectedAgreement == 'Month-to-Month'">
+                        <label class="col-sm-3 control-label" for="">Term Length : </label>
+                        <div class="col-sm-8">
+                            <input type="radio" id="1Year" class="termLength" name="AgreementTermLength" value="12" [ngModel]="property.AgreementTermLength" #termLength="ngModel">
+                            <label for="1Year">1 Year</label>
+
+                            <input type="radio" id="6Month" class="termLength" name="AgreementTermLength" value="6" [ngModel]="property.AgreementTermLength" #AgreementTermLength="ngModel">
+                            <label for="6Month">6 Month</label>
+
+                            <div class="customeNumber" id="termLengthCustomDiv">
+                                <input type="number" class="form-control" id="termLengthCustom" name="AgreementTermLength" placeholder="Months" [ngModel]="property.AgreementTermLength" #AgreementTermLength="ngModel" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" for="OwnerName">Name : </label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" id="OwnerName" name="OwnerName" placeholder="Name" [ngModel]="property.OwnerName" #OwnerName="ngModel"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group" [hidden]="selectedPhoneOnly == true">
+                        <label class="col-xs-12 col-sm-3 control-label" for="Email">Email : </label>
+                        <div class="col-xs-6 col-sm-6">
+                            <input type="email" class="form-control" id="Email" name="Email" placeholder="Email" [ngModel]="property.Email" #Email="ngModel" />
+                            <small [hidden]="Email.valid || (Email.pristine && !propertyForm.submitted)" class="text-danger">
+                                Please enter valid Email
+                            </small>
+                        </div>
+                        <div class="col-xs-5 col-sm-3">
+                            <input type="checkbox" id="IsEmailOnly" class="emailOnly" name="IsEmailOnly" [ngModel]="property.IsEmailOnly" #IsEmailOnly="ngModel" (change)="selectedEmailOnly=$event.target.checked">
+                            <label for="IsEmailOnly" data-toggle="tooltip" data-placement="top" title="Tenants will contact you by Email only">Email Only</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group" [hidden]="selectedEmailOnly == true">
+                        <label class="col-xs-12 col-sm-3 control-label" for="Phone">Phone : </label>
+                        <div class="col-xs-6 col-sm-6">
+                            <input type="text" class="form-control" id="Phone" name="Phone" placeholder="Phone Number" maxlength="10" [ngModel]="property.Phone" #Phone="ngModel" />
+                        </div>
+                        <div class="col-xs-5 col-sm-3">
+                            <input type="checkbox" id="IsPhoneOnly" class="IsPhoneOnly" name="IsPhoneOnly" [ngModel]="property.IsPhoneOnly" #IsPhoneOnly="ngModel" (change)="selectedPhoneOnly=$event.target.checked">
+                            <label for="IsPhoneOnly" data-toggle="tooltip" data-placement="top" title="Tenants will contact you by Phone only">Phone Only</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group big-form-group">
+                        <label class="col-sm-3 control-label required" for="MonthlyRent">Monthly Rent : </label>
+                        <div class="col-xs-6 col-sm-6">
+                            <input class="form-control" type="text" id="MonthlyRent" name="MonthlyRent" placeholder="Price ($)" [ngModel]="property.MonthlyRent" #MonthlyRent="ngModel" required="">
+                            <small [hidden]="MonthlyRent.valid || (MonthlyRent.pristine && !propertyForm.submitted)" class="text-danger">
+                                Please enter Monthly Rent
+                            </small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-5 col-md-5 col-sm-12">
+                    <div class="form-group">
+                        <label class="col-sm-2 col-md-3 text-left padT7 required" for="Address">Address : </label>
+                        <div class="col-sm-10 col-md-9" id="addressValidateDiv">
+                            <input id="Address" name="Address" placeholder="Property Address" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="form-control" #Address [formControl]="searchControl" value="{{address}}">
+
+                            <small *ngIf="!validAddress" class="text-danger">
+                                Please select proper address.
+                            </small>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 col-sm-12 pad0">
+                        <div>
+                            <sebm-google-map [latitude]="latitude" [longitude]="longitude" [scrollwheel]="true" [zoom]="zoom"
+                            [zoomControl]="true"
+                            (centerChange)="mapCenterChanged($event)"
+                            (boundsChange)="mapBoundsChanged($event)"
+                            (idle)="mapIdle($event, infoWindow)">
+                                <sebm-google-map-marker [latitude]="latitude" [longitude]="longitude"
+                                [markerDraggable]="true"
+                                (dragEnd)="updateLocation($event)">
+                                </sebm-google-map-marker>
+                            </sebm-google-map>
+                            
+                        </div>
+                        <h4 class="col-md-12 col-sm-12">Wrong address showing? Move the pin to correct location.</h4>
+                    </div>
+                    <h5 class="col-md-12 col-sm-12 text-danger hidden" id='addressMapError'></h5>
+
+                    <div class="col-xs-12 col-sm-12 pad0">
+                        <div class="dropzone" id="dropzoneFileUpload">
+                          <div id="dropzone-drop-area" class="dropzone-drop-area">
+                            <div *ngIf="!fileDropped" class="centered noselect clickthrough">
+                                <ng-content></ng-content>
+                            </div>
+                          </div>
+                        </div>
+                        <small *ngIf="!validImages" class="text-danger">
+                            Please Select at least one image.
+                        </small>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 pad0">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label class="col-sm-2 col-md-3 text-left padL0 required" for="Title">Title : </label>
+                                <div class="col-sm-10 col-md-9">
+                                    <input type="text" class="form-control" id="Title" name="Title" placeholder="Title"  [ngModel]="property.Title" #Title="ngModel" required/>
+                                    <small [hidden]="Title.valid || (Title.pristine && !propertyForm.submitted)" class="text-danger">
+                                        Property Title is Required
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label class="col-sm-2 col-md-3 text-left padL0" for="Description">Description : </label>
+                                <div class="col-sm-10 col-md-9">
+                                    <textarea class="form-control" id="Description" name="Description" placeholder="Desciption" [ngModel]="property.Description" #Description="ngModel"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal Footer -->
+        <div class="modal-footer">
+            <div class="container">
+                <div class="col-xs-offset-0 col-sm-offset-3 col-md-offset-3  col-lg-offset-3 col-sm-4 col-md-3 col-lg-3 col-xs-8">
+                    <div class='form-group'>
+                        <label class='mrgT10 col-xs-6 col-sm-6 col-md-6 control-label' for=''> Activate?</label>
+                        <div class='col-xs-6 col-sm-6 col-md-6 activateDiv' data-html="true" data-toggle="tooltip" data-placement="top" title="Activation is FREE! <br><br>ACTIVE: Shows your listing to tenants. <br><br> INACTIVE: Hides your listing from tenants, and saves it to your dashboard for future use. IE. Next time unit is vacant.">
+                            <label class="toggle col-sm-12">
+                                <input #isActiveToggle type="checkbox" (click)="changeIsActive()">
+                                <span class="handle"><span class="toggleValue {{isActiveValue}}">{{isActiveValue}}</span></span>
+
+                            </label>
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-1 col-sm-2 col-xs-4">
+                    <button id="uploadPropertyBtn" type="submit" class="btn btn-primary btn-lg"> {{submitBtnText}} </button>
+                </div>
+            </div>
+        </div>
+    </form>
+</section>

@@ -1,0 +1,35 @@
+export class Property {
+    "Id": number;
+	"UserId": number;
+	"PropertyType": string;
+	"Bed": string;
+	"Bath": string;
+	"Pet": string;
+	"Smoking": string;
+	"RentInclude": string[];
+	"Parking": string;
+	"Amenities": string[];
+	"Pictures": any[];
+	"LandlordType": string;
+	"AgreementType": string;
+	"IsImmediateAvailable": boolean;
+	"DateAvailable": string;
+	"AgreementTermLength": string;
+	"OwnerName": string;
+	"Phone": string;
+	"IsPhoneOnly": boolean;
+	"Email": string;
+	"IsEmailOnly": boolean;
+	"MonthlyRent": string;
+	"Address": string;
+	"Title": string;
+	"Description": string;
+	"Latitude": string;
+	"Longitude": string;
+	"IsActive": boolean;
+	"DateCreated": string;
+	"CreatedBy": string;
+	"DateModified": string;
+	"ModifiedBy": string;
+	"IsDeleted": boolean;
+}
